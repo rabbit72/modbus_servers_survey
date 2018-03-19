@@ -31,7 +31,7 @@ VALUE_NAMES = [
 
 def get_list_servers():
     list_servers = []
-    with open('hosts.txt', 'r', encoding='utf8') as file_with_servers:
+    with open('hosts.txt', 'r') as file_with_servers:
         for server in file_with_servers:
             host, name_server = server.rstrip().split(',')
             list_servers.append((host, name_server))
@@ -42,7 +42,9 @@ def save_data_xlsx(servers_data):
     wb = Workbook()
     sheet = wb.active
     sheet.title = 'log_servers'
-    columns_names = [*STATUS_NAMES, *VALUE_NAMES]
+    columns_names = []
+    columns_names.extend(STATUS_NAMES)
+    columns_names.extend(VALUE_NAMES)
     row_names = ['Name server']
     row_names.extend(columns_names)
     sheet.append(row_names)
@@ -102,9 +104,6 @@ def processing_equipment_status(register):
 def get_scaling_temperature_values(values):
     temperature_values = {}
     for key, value in zip(VALUE_NAMES, values):
-        '''Temperature matching:
-        0 is 0°C and 32768 is 3276.8°C
-        65535 is -1°C and 32769 is -3276.7°C'''
         if value > 32768:
             value -= 65536
         temperature_values[key] = value / 10

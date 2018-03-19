@@ -1,6 +1,7 @@
 # custom
 modbus_servers_survey.exe
 hosts.txt
+*.xlsx
 
 # PyCharm
 .idea/

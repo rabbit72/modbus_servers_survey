@@ -1,3 +1,4 @@
+import os
 import win_inet_pton
 from datetime import datetime
 from pyModbusTCP.client import ModbusClient
@@ -61,7 +62,10 @@ def save_data_xlsx(servers_data):
         row += 1
 
     time_point = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-    name_file = '{0}.xlsx'.format(time_point)
+    dir_for_file = './logs/'
+    if not os.path.exists(dir_for_file):
+        os.makedirs(dir_for_file)
+    name_file = os.path.join(dir_for_file, '{0}.xlsx'.format(time_point))
     wb.save(name_file)
 
 

@@ -2,6 +2,7 @@
 modbus_servers_survey.exe
 hosts.txt
 *.xlsx
+logs/
 
 # PyCharm
 .idea/

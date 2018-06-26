@@ -102,6 +102,11 @@ def processing_equipment_status(register):
 
 
 def get_scaling_temperature_values(values):
+    """
+    Temperature matching:
+    0 is 0 C and 32768 is 3276.8 degree C
+    65535 is -1 degree C and 32769 is -3276.7 degree C
+    """
     temperature_values = {}
     for key, value in zip(VALUE_NAMES, values):
         if value > 32768:
